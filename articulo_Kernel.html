@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+     
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Noto+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JM TECH | ¿Qué es un kernel?</title>
+  <link rel="stylesheet" href="CSS/estilos.css">
+  <link rel="stylesheet" href="CSS/articulos.css">
+
+</head>
+<body>
+
+<header>
+  <div>
+    <a href="index.html">
+     <img src="img/logo pagina.png" alt="JM TECH" class="logo">
+     </a>
+    </div>
+    <nav>
+      <a href="#" onclick="window.location.href='index.html'; return false;">Inicio</a>
+      <a href="#">Artículos</a>
+      <a href="#" onclick="window.open('https://www.youtube.com/@TheJMYT', '_blank'); return false;">Mis Videos</a>
+  
+      <div class="menu-toggle" id="menu-toggle">⚙️</div>
+      <ul id="menu-options">
+        <li><a href="#">Opción 1</a></li>
+        <li><a href="#">Opción 2</a></li>
+        <li><a href="#">Opción 3</a></li>
+      </ul>
+    </nav>
+</header>
+
+<main>
+  <article class="article-content">
+    <header class="article-header">
+      <h1 class="article-title">¿Qué es un kernel y por qué es importante?</h1>
+      <div class="article-meta">
+        <span class="article-author">by: JM Teach</span>
+        <span>Publicado el 28 de abril de 2025</span>
+      </div>
+    </header>
+    
+    <div class="article-section">
+      <p>El término kernel es fundamental en sistemas operativos, siendo el núcleo que gestiona los recursos del sistema y permite la comunicación entre el hardware y el software.</p>
+      
+      <img src="img/kernel.webp" alt="Diagrama de un kernel" class="article-img">
+    </div>
+    
+    <div class="article-section">
+      <h2>¿Qué hace un kernel?</h2>
+      <p>El kernel funciona como intermediario en la comunicación entre el hardware (procesador, memoria, dispositivos) y el software (aplicaciones). Sus funciones principales incluyen:</p>
+      <ul>
+        <li><strong>Gestión de memoria:</strong> Controla la asignación y liberación de memoria RAM</li>
+        <li><strong>Control de procesos:</strong> Administra la ejecución de programas</li>
+        <li><strong>Administración de dispositivos:</strong> Gestiona el hardware conectado</li>
+        <li><strong>Seguridad y acceso:</strong> Controla los permisos del sistema</li>
+      </ul>
+      <p>El kernel es el corazón del sistema operativo, gestionando eficientemente todos los recursos del sistema.</p>
+    </div>
+    
+    <div class="article-section">
+      <h2>Tipos de kernel</h2>
+      <p>Existen varios tipos de kernel, cada uno con sus ventajas y desventajas:</p>
+      
+      <h3>Kernels monolíticos</h3>
+      <p>Todo el sistema operativo funciona en espacio de kernel (ej: Linux). Ofrece alto rendimiento pero menor estabilidad.</p>
+      
+      <h3>Microkernels</h3>
+      <p>Solo las funciones esenciales están en el kernel (ej: macOS). Mayor estabilidad pero menor rendimiento.</p>
+      
+      <h3>Híbridos</h3>
+      <p>Combinación de ambos enfoques (ej: Windows). Balance entre rendimiento y estabilidad.</p>
+    </div>
+    
+    <div class="conclusion">
+      <h2>Conclusión</h2>
+      <p>El kernel es un componente fundamental para los sistemas operativos, siendo esencial para el funcionamiento de cualquier computadora. Su diseño y eficiencia determinan en gran medida el rendimiento general del sistema. La elección del tipo de kernel afecta directamente la estabilidad, seguridad y velocidad del sistema operativo.</p>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <div class="footer-left">
+    <p><a href="#">Política de Privacidad</a> | <a href="#">Términos y Condiciones</a> | <a href="#">Contacto</a></p>
+  </div>
+  <div class="footer-right">
+    <p>© 2025 JM TECH</p>
+  </div>
+</footer>
+
+<script src="JS/script.js"></script>
+</body>
+</html>
