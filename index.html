@@ -592,62 +592,70 @@
 </footer>
 
 <script>
-// Funcionalidad FAQ
-document.querySelectorAll('.faq-question').forEach(q => {
-    q.addEventListener('click', () => {
-        const idx = q.dataset.index;
-        const answer = document.getElementById('answer-' + idx);
-        answer.classList.toggle('open');
-        q.querySelector('span').textContent = answer.classList.contains('open') ? '−' : '+';
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("DOM listo, iniciando script...");
+
+    // Funcionalidad FAQ
+    document.querySelectorAll('.faq-question').forEach(q => {
+        q.addEventListener('click', () => {
+            const idx = q.dataset.index;
+            const answer = document.getElementById('answer-' + idx);
+            answer.classList.toggle('open');
+            q.querySelector('span').textContent = answer.classList.contains('open') ? '−' : '+';
+        });
     });
-});
 
-// Botón pegar
-document.getElementById('paste-btn')?.addEventListener('click', async () => {
-    try {
-        const text = await navigator.clipboard.readText();
-        document.getElementById('url-input').value = text;
-    } catch {
-        alert('No se pudo pegar desde el portapapeles.');
-    }
-});
-
-// Descargar video con API real
-async function getInstagramVideo(url) {
-    const res = await fetch(`https://instagram120.p.rapidapi.com/api/instagram/hls?url=${encodeURIComponent(url)}`, {
-        method: 'GET',
-        headers: {
-            'x-rapidapi-host': 'instagram120.p.rapidapi.com',
-            'x-rapidapi-key': '690f127beamsh3131688e6da4a04p14e156jsn56246f3257e8'
+    // Botón pegar
+    document.getElementById('paste-btn')?.addEventListener('click', async () => {
+        try {
+            const text = await navigator.clipboard.readText();
+            document.getElementById('url-input').value = text;
+        } catch {
+            alert('No se pudo pegar desde el portapapeles.');
         }
     });
-    return res.json();
-}
 
-document.getElementById('download-btn')?.addEventListener('click', async () => {
-    const url = document.getElementById('url-input').value.trim();
-    if (!url) {
-        alert('Por favor, pega un enlace de Instagram.');
-        return;
+    // Descargar video con API (usando proxy para evitar CORS en pruebas)
+    async function getInstagramVideo(url) {
+        const proxy = "https://cors-anywhere.herokuapp.com/"; // SOLO PRUEBAS
+        console.log("Solicitando a la API:", url);
+
+        const res = await fetch(proxy + `https://instagram120.p.rapidapi.com/api/instagram/hls?url=${encodeURIComponent(url)}`, {
+            method: 'GET',
+            headers: {
+                'x-rapidapi-host': 'instagram120.p.rapidapi.com',
+                'x-rapidapi-key': '690f127beamsh3131688e6da4a04p14e156jsn56246f3257e8'
+            }
+        });
+        return res.json();
     }
 
-    try {
-        const data = await getInstagramVideo(url);
-
-        if (data && data.data && data.data.playlist) {
-            document.getElementById('preview-thumb').src = data.data.thumbnail || '';
-            document.getElementById('preview-title').textContent = 'Video de Instagram';
-            document.getElementById('preview-info').textContent = 'Video encontrado';
-            document.getElementById('download-final').href = data.data.playlist;
-            document.getElementById('preview').style.display = 'block';
-            document.getElementById('preview').scrollIntoView({behavior:'smooth'});
-        } else {
-            alert('No se pudo obtener el video. Asegúrate de que el enlace sea público.');
+    document.getElementById('download-btn')?.addEventListener('click', async () => {
+        const url = document.getElementById('url-input').value.trim();
+        if (!url) {
+            alert('Por favor, pega un enlace de Instagram.');
+            return;
         }
-    } catch (err) {
-        console.error(err);
-        alert('Error al conectar con la API.');
-    }
+
+        try {
+            const data = await getInstagramVideo(url);
+            console.log("Respuesta de la API:", data);
+
+            if (data?.data?.playlist) {
+                document.getElementById('preview-thumb').src = data.data.thumbnail || '';
+                document.getElementById('preview-title').textContent = 'Video de Instagram';
+                document.getElementById('preview-info').textContent = 'Video encontrado';
+                document.getElementById('download-final').href = data.data.playlist;
+                document.getElementById('preview').style.display = 'block';
+                document.getElementById('preview').scrollIntoView({ behavior: 'smooth' });
+            } else {
+                alert('No se pudo obtener el video. Asegúrate de que el enlace sea público.');
+            }
+        } catch (err) {
+            console.error("Error al conectar con la API:", err);
+            alert('Error al conectar con la API.');
+        }
+    });
 });
 </script>
 </body>
